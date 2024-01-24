@@ -74,7 +74,7 @@ const SelectedBtns = ({ numTracks, setSelected, selected }) => {
               }}
             ></span>
           )}
-          <p className={`w-full h-16 text-left items-start pt-4 px-1 font-semibold text-gray-500 ${selected === index && "text-red-600"} uppercase`}>{item.button}</p>
+          <p className={`w-full h-16 text-left items-start pt-4 px-1 text-gray-500 ${selected === index && "text-red-600"} capitalize`}>{item.button}</p>
         </button>
       ))}
     </div>
