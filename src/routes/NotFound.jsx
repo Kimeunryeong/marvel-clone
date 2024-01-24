@@ -6,7 +6,7 @@ export default function NotFound() {
     <>
       <Layout>
         <div className="w-full flex justify-center">
-          <div className=" max-w-7xl w-full flex h-[calc(100vh-376px)]">
+          <div className=" max-w-7xl w-full flex h-[calc(100vh-372px)]">
             {/* 왼쪽 */}
             <div className=" w-1/2 h-full flex flex-col justify-center space-y-6">
               <h1 className=" text-4xl font-bold">404 PAGE NOT FOUND</h1>

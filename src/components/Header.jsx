@@ -1,6 +1,6 @@
 import { FaSearch } from "react-icons/fa";
 import title_logo from "../assets/png/title_logo.png";
-import diseney from "../assets/diseney.svg";
+
 
 export default function Header() {
   return (
@@ -52,10 +52,7 @@ export default function Header() {
         <p>videos</p>
         <p>more</p>
       </section>
-      <section className="w-full flex justify-center h-10 bg-[#151515]  text-white items-center uppercase space-x-2">
-        <span>STREAM ECHO ON</span>
-        <img className="h-full" src={diseney} />
-      </section>
+     
     </>
   );
 }

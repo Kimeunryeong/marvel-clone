@@ -14,18 +14,18 @@ export default function Footer() {
       <div className=" max-w-7xl w-full flex justify-between text-white ">
         {/* 1. 로고 */}
         <div className="flex space-x-8">
-          {/* insider로고 */}
+          {/* (1)로고 */}
           <div>
             <img src={FooterLogo} alt="footer_logo" />
           </div>
-          {/* 2 */}
+          {/* (2) */}
           <div>
             <p>ABOUT MARVEL</p>
             <p>HELP/FAQS</p>
             <p>CAREERS</p>
             <p>INTERNSHIPS</p>
           </div>
-          {/* 3 */}
+          {/* (3) */}
           <div>
             <p>ADVERTISING</p>
             <p>DISNEY+</p>
@@ -34,17 +34,17 @@ export default function Footer() {
           </div>
         </div>
         {/* 2. ads */}
-        <div className="flex flex-col">
+        <div className="space-y-8">
           {/* 위 */}
           <div className="flex space-x-4">
-            {/* 이미지 */}
-            <div>
-              <img
+            {/* (1)이미지 */}
+            <div className="h-8">
+              <img className="h-full"
                 src="https://cdn.marvel.com/content/1x/marvel_insider-topnav-logo-large2x.png"
                 alt="insider_image"
               />
             </div>
-            {/* 본문 */}
+            {/* (2)본문 */}
             <div>
               <h2 className=" uppercase font-semibold">marvel insider</h2>
               <p className=" text-gray-500 text-sm">
@@ -54,15 +54,16 @@ export default function Footer() {
           </div>
 
           {/* 아래 */}
-          <div className="flex ">
-            {/* 이미지 */}
+          <div className="flex space-x-4">
+            {/* (1)이미지 */}
             <div className="h-8">
               <img
+              className="h-full"
                 src="https://cdn.marvel.com/content/1x/mu-logo-w-nav-2x-2021-02.png"
                 alt="insider_image"
               />
             </div>
-            {/* 본문 */}
+            {/* (2)본문 */}
             <div>
               <h2 className=" uppercase font-semibold">marvel insider</h2>
               <p className=" text-gray-500 text-sm">
