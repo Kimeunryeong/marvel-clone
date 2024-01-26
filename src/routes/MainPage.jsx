@@ -1,120 +1,126 @@
-import { useState } from "react";
-import Button from "../components/Button";
+import { useQuery } from "react-query";
 import Layout from "../components/Layout";
-import NoticeDisney from "../components/NoticeDisney";
-import { testimonials } from "../lib/menus";
+import MainSlide from "../components/MainSlide";
+import TitleImageBox from "../components/TitleImageBox";
+import { apiGetComics } from "../api";
 import { motion } from "framer-motion";
-import Facebook from "../assets/Facebook";
-import Insta from "../assets/Insta";
-import Pinter from "../assets/Pinter";
+import { useState } from "react";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import useMeasure from "react-use-measure";
 
-const Card = ({
-  image,
-  title,
-  link,
-  text,
-  selected,
-  setSelected,
-  position,
-}) => {
-  const offset = position <= selected ? 0 : 100;
-  return (
-    <div className="w-full h-full flex justify-center relative">
-      <motion.div
-        initial={false}
-        animate={{
-          x: `${offset}`,
-        }}
-        transition={{
-          duration: 0.25,
-          ease: "easeOut",
-        }}
-        style={{
-          zIndex: position,
-        }}
-        onClick={() => setSelected(position)}
-        className=" absolute top-0 left-0 w-full h-full flex justify-center"
-      >
-        <img className="w-full h-full object-cover" src={image} alt={title} />
-      </motion.div>
-      <div className=" absolute max-w-7xl w-full h-full flex flex-col text-white space-y-4 justify-center">
-        <h1 className=" text-4xl font-bold uppercase">{title}</h1>
-        <p className=" text-xl">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia,
-          facere.
-        </p>
-        <Button link={link} text={text} />
-      </div>
-    </div>
-  );
-};
 
-const SelectedBtns = ({ numTracks, setSelected, selected }) => {
-  return (
-    <div className="flex space-x-2">
-      {numTracks.map((item, index, array) => (
-        <button
-          className="h-2 w-full bg-slate-300 relative"
-          key={index}
-          onClick={() => setSelected(index)}
-        >
-          {selected === index ? (
-            <motion.span
-              initial={{ width: "0%" }}
-              animate={{ width: "100%" }}
-              transition={{ duration: 3, ease: "easeOut" }}
-              onAnimationComplete={() =>setSelected(selected === array.length - 1 ? 0 : selected + 1)}
-              className="absolute top-0 left-0 bg-red-600 w-full h-full"
-            ></motion.span>
-          ) : (
-            <span
-              className="absolute top-0 left-0 bg-red-600"
-              style={{
-                width: selected > index ? "100%" : "0%",
-              }}
-            ></span>
-          )}
-          <p className={`w-full h-16 text-left items-start pt-4 px-1 text-gray-500 ${selected === index && "text-red-600"} capitalize`}>{item.button}</p>
-        </button>
-      ))}
+const ListItem = ({ item, CARD_WIDTH, CARD_HEIGHT, MARGIN }) => (
+  <div
+    className="shrink-0"
+    style={{
+      width: CARD_WIDTH,
+      height: CARD_HEIGHT,
+      margin: MARGIN,
+    }}
+  >
+    {/* 1 이미지 박스 */}
+    <div className="w-full h-[280px]">
+      <img
+        className="w-full h-full object-cover object-center"
+        src={`${item.thumbnail?.path}.${item.thumbnail?.extension}`}
+        alt="comic_image"
+      />
     </div>
-  );
-};
+    {/* 2 타이틀 */}
+    <div>
+      <h2 className="text-sm font-semibold">{item.title}</h2>
+      <h4 className="text-sm text-gray-500">{item.modified.substr(0, 10)}</h4>
+    </div>
+  </div>
+);
 
 export default function MainPage() {
-  const [selected, setSelected] = useState(0);
+  let lists; // fetch 요청한 배열을 받기 위한 변수
+  const { data, isLoading } = useQuery(["getComics"], apiGetComics);
+  if (!isLoading) {
+    lists = data?.data.results;
+  }
+  console.log(isLoading, data);
+
+  // motion
+  const CARD_WIDTH = 195;
+  const CARD_HEIGHT = 340;
+  const MARGIN = 8;
+  const CARD_SIZE = CARD_WIDTH + MARGIN;
+  const BREAKPOINT = {
+    sm: 640,
+    lg: 1024,
+  };
+  const [ref, { width }] = useMeasure();
+  const [offset, setOffset] = useState(0);
+
+  const CARD_BUFFER = width > BREAKPOINT.lg ? 3 : width > BREAKPOINT.sm ? 2 : 1;
+
+  const CAN_SHIFT_LEFT = offset < 0;
+
+  const CAN_SHIFT_RIGHT =
+    Math.abs(offset) < CARD_SIZE * (lists?.length - CARD_BUFFER);
+
+  const shiftLeft = () => {
+    if (!CAN_SHIFT_LEFT) return;
+    setOffset((pv) => (pv += CARD_SIZE));
+  };
+
+  const shiftRight = () => {
+    if (!CAN_SHIFT_RIGHT) return;
+    setOffset((pv) => (pv -= CARD_SIZE));
+  };
+
   return (
     <Layout>
-      {/* notice disney */}
-      <NoticeDisney />
-      {/* 메인 캐러셀 */}
-      <section className=" w-full flex flex-col">
-        {/* 그림 */}
-        <div className=" h-[450px] w-full overflow-hidden">
-          {testimonials.map((item, index) => (
-            <Card
-              key={index}
-              {...item}
-              selected={selected}
-              setSelected={setSelected}
-              position={index}
-            />
-          ))}
-        </div>
-        {/* 버튼 */}
-        <div className=" w-full flex justify-center h-20">
-          <div className=" max-w-7xl w-full h-full grid grid-cols-4">
-            {/* grid 1 : 75% */}
-            <div className=" col-span-3 -translate-y-12 bg-white">
-              <SelectedBtns
-                numTracks={testimonials}
-                setSelected={setSelected}
-                selected={selected}
+      {/* 메인 슬라이드 컴포넌트 */}
+      <MainSlide />
+
+      {/* 코믹스 섹션 */}
+      <TitleImageBox imgUrl="https://cdn.britannica.com/62/182362-050-BD31B42D/Scarlett-Johansson-Black-Widow-Chris-Hemsworth-Thor.jpg" />
+
+      <section className="w-full flex justify-center">
+        <div ref={ref} className="relative max-w-7xl w-full ">
+          <motion.div
+            animate={{
+              x: offset,
+            }}
+            className="w-full flex"
+          >
+            {lists?.map((item, index) => (
+              <ListItem
+                CARD_WIDTH={CARD_WIDTH}
+                CARD_HEIGHT={CARD_HEIGHT}
+                MARGIN={MARGIN}
+                item={item}
+                key={index}
               />
-            </div>
-            {/* grid 2 : 25% */}
-            <div className=" flex w-full h-full justify-end space-x-4 pt-4"><Facebook/> <Insta/> <Pinter/></div>
-          </div>
+            ))}
+          </motion.div>
+
+          {/* Left Button */}
+          <motion.button
+            initial={false}
+            animate={{
+              x: CAN_SHIFT_LEFT ? "0%" : "-100%",
+            }}
+            onClick={shiftLeft}
+            className="absolute left-0 top-[35%] bg-slate-500/50 duration-100 p-3  pl-2 text-4xl text-white hover:pl-3"
+          >
+            <FaChevronLeft />
+          </motion.button>
+
+          {/* Right Button */}
+          <motion.button
+            initial={false}
+            animate={{
+              x: CAN_SHIFT_RIGHT ? "0%" : "100%",
+            }}
+            onClick={shiftRight}
+            className="absolute right-0 top-[35%] bg-slate-500/50 duration-100 p-3  pr-2 text-4xl text-white hover:pr-3"
+          >
+            <FaChevronRight />
+          </motion.button>
         </div>
       </section>
     </Layout>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function Button({ link, text }) {
+export default function Button({ link, text, outline }) {
   return (
     <Link to={link}>
       <div>
@@ -10,7 +10,11 @@ export default function Button({ link, text }) {
             clipPath:
               "polygon(12% 0, 100% 0, 100% 67%, 88% 100%, 0 100%, 0 32%",
           }}
-          className=" uppercase bg-red-600 px-10 py-4 font-bold hover:bg-red-700 duration-500"
+          className={`uppercase  px-8 py-4 font-bold  ${
+            outline === "outline"
+              ? "bg-gray-500 hover:bg-gray-700"
+              : "bg-red-600 hover:bg-red-700 duration-500"
+          }`}
         >
           {text}
         </button>
