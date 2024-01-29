@@ -5,7 +5,7 @@ export default function TitleRotate({text}) {
     <>
       {/* 사선으로 된 제목 */}
       <div className="relative w-80 h-20 flex items-center">
-        <span className=" uppercase tracking-widest text-lg font-bold">
+        <span className=" uppercase tracking-widest text-lg font-bold z-10 ">
           {text}
         </span>
         {/* 사선 */}
