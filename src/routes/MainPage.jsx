@@ -44,17 +44,17 @@ export default function MainPage() {
             {/* 타이틀 */}
             <TitleRotate text="the events" />
             {/*  이벤트  api 에서 불러오기 */}
-            <div className=" w-full flex flex-col">
+            <div className=" w-full">
               {events &&
                 events.map((item) => (
                   <div key={item?.id} className="">
-                    <div className="w-full h-30 flex space-x-6 border-b-2 p-6">
+                    <div className="w-[40%] h-40  overflow-hidden  border-b-2 bg-slate-500">
                       <img
                         src={`${item.thumbnail.path}.${item.thumbnail.extension}`}
                         alt={item.title}
-                        className="w-[40%]"
+                        className=""
                       />
-                      <div className=" space-y-2">
+                      <div className="w-[60%] space-y-2">
                         <div className=" font-bold">{item.title}</div>
                         <div>{item.description}</div>
                         <div className=" text-slate-400">{item.modified}</div>
