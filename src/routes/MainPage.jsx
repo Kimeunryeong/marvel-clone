@@ -67,7 +67,7 @@ export default function MainPage() {
             <TitleRotate text="the events" />
             {/*  이벤트  api 에서 불러오기 */}
             <div className=" w-full">
-              {events?.map((item) => (
+              {events?.slice(0, 6).map((item) => (
                 <div
                   key={item?.id}
                   className="w-full h-64 flex pb-4 space-x-6 border-b-2 cursor-pointer"
@@ -89,7 +89,7 @@ export default function MainPage() {
             </div>
           </div>
           {/* 오른쪽 */}
-          <div className=" w-full border-t-4 border-b-4 rounded-3xl p-6 min-w-[300px] min-h-[300px]">
+          <div className=" w-full border-t-4 border-b-4 rounded-3xl p-6 w-[300px] h-26">
             <div className=" text-center space-y-4  py-6">
               <h2 className=" uppercase font-bold text-2xl">the hype box</h2>
               <p>
@@ -98,7 +98,7 @@ export default function MainPage() {
             </div>
             <div className="flex w-full h-full space-x-2 p-2 grid grid-cols-[3fr_7fr]">
               <div className="">
-                <img src=""/>
+                <img src="" />
               </div>
               <div>텍스트</div>
             </div>
