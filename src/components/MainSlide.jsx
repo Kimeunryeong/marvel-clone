@@ -7,6 +7,7 @@ import Pinter from "../assets/Pinter";
 import Button from "../components/Button";
 import { motion } from "framer-motion";
 
+
 const Card = ({
   logoImage,
   image,

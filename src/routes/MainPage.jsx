@@ -8,6 +8,10 @@ import TitleRotate from "../components/TitleRotate";
 import Layout7 from "../components/Layout7";
 import { RingLoader } from "react-spinners";
 import Button from "../components/Button";
+import HypeImg from "../assets/titleHype.svg"
+
+
+
 
 export default function MainPage() {
   let lists; // fetch 요청한 배열을 받기 위한 변수
@@ -32,7 +36,7 @@ export default function MainPage() {
 
   // 캐릭터 fetch
   const { data: dataCharacters, isLoading: isLoadingCharacters } = useQuery(
-    ["getCharacters", { limit: 30 }],
+    ["getCharacters", { limit: 10 }],
     apiGetCharacters
   );
   if (!isLoadingCharacters) {
@@ -60,47 +64,85 @@ export default function MainPage() {
 
       {/* 이벤트 */}
       <section className=" w-full flex justify-center">
-        <div className=" max-w-7xl w-full  grid grid-cols-[7fr_3fr]">
+        <div className=" max-w-7xl w-full  grid grid-cols-[7fr_3fr] gap-16">
           {/* 왼쪽 */}
           <div className=" w-full h-full ">
             {/* 타이틀 */}
             <TitleRotate text="the events" />
             {/*  이벤트  api 에서 불러오기 */}
             <div className=" w-full">
-              {events?.slice(0, 6).map((item) => (
+              {events?.slice(0, 6).map((item, index) => (
                 <div
                   key={item?.id}
                   className="w-full h-64 flex pb-4 space-x-6 border-b-2 cursor-pointer"
                 >
-                  <div className="w-[40%] h-full py-2">
+                  {/* 이미지 */}
+                  <div className="w-[40%] h-full">
                     <img
                       src={`${item.thumbnail.path}.${item.thumbnail.extension}`}
                       alt={item.title}
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <div className="w-[60%] space-y-2 ">
-                    <div className=" font-bold">{item.title}</div>
-                    <div>{item.description}</div>
-                    <div className=" text-slate-400">{item.modified}</div>
+                  {/* description */}
+                  <div className="w-[60%] h-full space-y-2">
+                    <h2 className="uppercase font-bold group-hover:text-red-600 duration-500">
+                      {item.title}
+                    </h2>
+                    <p>{item.description}</p>
+                    <h3 className=" text-slate-400">
+                      {item.start?.substr(0, 10)}
+                    </h3>
                   </div>
                 </div>
               ))}
             </div>
+            <div className="w-full flex justify-center pb-8 pt-4">
+              <Button text="load more" outline="outline" />
+            </div>
           </div>
           {/* 오른쪽 */}
-          <div className=" w-full border-t-4 border-b-4 rounded-3xl p-6 w-[300px] h-26">
-            <div className=" text-center space-y-4  py-6">
-              <h2 className=" uppercase font-bold text-2xl">the hype box</h2>
-              <p>
-                Can’t-miss news and updates from across the Marvel Universe!
-              </p>
-            </div>
-            <div className="flex w-full h-full space-x-2 p-2 grid grid-cols-[3fr_7fr]">
-              <div className="">
-                <img src="" />
+          <div className="w-full py-16">
+            {/* 박스 상단 테두리 */}
+            <div className="relative w-full mb-8">
+              <img src={HypeImg} alt="hype_image" />
+              <div className="h-20 text-center w-full flex flex-col items-center">
+                <h2 className="text-2xl font-semibold uppercase -translate-y-2">
+                  The Hype box
+                </h2>
+                <p className="w-2/3 text-xs">
+                  Can’t-miss news and updates from across the Marvel Universe!
+                </p>
               </div>
-              <div>텍스트</div>
+            </div>
+            {/* 박스 내용  */}
+            <div className="w-full flex flex-col px-4 divide-y">
+              {/* 아이템 */}
+              {dataEvents?.data?.results?.slice(5, 10).map((item, index) => (
+                <div
+                  key={index}
+                  className="w-full py-8 flex group cursor-pointer"
+                >
+                  <div className="w-[40%] aspect-auto">
+                    <img
+                      src={`${item.thumbnail?.path}.${item.thumbnail?.extension}`}
+                      alt="event_image"
+                      className="w-[90%] aspect-video object-cover"
+                    />
+                  </div>
+                  <div className="w-[60%] px-4 space-y-2">
+                    <h2 className="font-semibold uppercase group-hover:text-red-600 duration-500">
+                      {item.title}
+                    </h2>
+                    <p className="text-xs">{item.description.substr(0, 80)}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* 하단 박스 테두리 */}
+            <div className="w-full flex justify-end">
+              <img src={HypeImg} className=" rotate-180" alt="hype_image" />
             </div>
           </div>
         </div>

@@ -5,13 +5,20 @@ import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import MainPage from "./routes/MainPage.jsx";
 import NotFound from "./routes/NotFound.jsx";
 import { QueryClient, QueryClientProvider } from "react-query";
+import Character from "./routes/Characters.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Outlet />,
     errorElement: <NotFound />,
-    children: [{ path: "", element: <MainPage /> }],
+    children: [
+      { path: "", element: <MainPage /> },
+      {
+        path: "characters",
+        element: <Character />,
+      },
+    ],
   },
 ]);
 

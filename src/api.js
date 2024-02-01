@@ -11,7 +11,6 @@ export async function apiGetComics() {
   }).then((res) => res.json());
 }
 
-
 // [GET] Events 리스트
 export async function apiGetEvents() {
   return await fetch(`${BASE_URL}/events?limit=10&apikey=${API_KEY}`, {
@@ -23,16 +22,36 @@ export async function apiGetEvents() {
 }
 
 // [GET] Characters 리스트
-export async function apiGetCharacters({queryKey}) {
-  const limit = queryKey[1].limit
-  try {return await fetch(`${BASE_URL}/characters?limit=${limit}&apikey=${API_KEY}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  }).then((res) => res.json());
+export async function apiGetCharacters({ queryKey }) {
+  const limit = queryKey[1].limit;
+  try {
+    return await fetch(
+      `${BASE_URL}/characters?limit=${limit}&apikey=${API_KEY}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    ).then((res) => res.json());
+  } catch (error) {
+    console.log(error);
+  }
+}
 
-  }catch(error){
-    console.log(error)
+
+// params: id
+// [GET] Characters Detail
+export async function apiGetCharacterDetail({ queryKey }) {
+  const id = queryKey[1].limit;
+  try {
+    return await fetch(`${BASE_URL}/characters/${id}apikey=${API_KEY}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => res.json());
+  } catch (error) {
+    console.log(error);
   }
 }
