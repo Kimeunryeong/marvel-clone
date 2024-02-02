@@ -6,6 +6,9 @@ import MainPage from "./routes/MainPage.jsx";
 import NotFound from "./routes/NotFound.jsx";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Character from "./routes/Characters.jsx";
+import ComicDetail from "./routes/ComicDetail.jsx";
+import Comics from "./routes/Comics.jsx";
+import Email from "./routes/Email.jsx";
 
 const router = createBrowserRouter([
   {
@@ -14,10 +17,16 @@ const router = createBrowserRouter([
     errorElement: <NotFound />,
     children: [
       { path: "", element: <MainPage /> },
+      { path: "email", element: <Email /> },
       {
         path: "characters",
         element: <Character />,
       },
+      {
+        path: "comics/:id",
+        element: <ComicDetail />,
+      },
+      { path: "comics", element: <Comics /> },
     ],
   },
 ]);

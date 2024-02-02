@@ -76,27 +76,27 @@ export default function Footer() {
         <div className=" space-y-6">
           <h3 className=" uppercase">follow Marvel</h3>
           <div className="grid grid-cols-4 grid-rows-2 gap-x-10 gap-y-4">
-            <p>
+            <div>
               <Facebook />
-            </p>
-            <p>
+            </div>
+            <div>
               <Twitter />
-            </p>
-            <p>
+            </div>
+            <div>
               <Insta />
-            </p>
-            <p>
+            </div>
+            <div>
               <Tumblr />
-            </p>
-            <p>
+            </div>
+            <div>
               <Youtube />
-            </p>
-            <p>
+            </div>
+            <div>
               <Snapchat />
-            </p>
-            <p>
+            </div>
+            <div>
               <Pinter />
-            </p>
+            </div>
           </div>
         </div>
       </div>
