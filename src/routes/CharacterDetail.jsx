@@ -24,7 +24,7 @@ export default function CharacterDetail() {
         style={{
           backgroundSize: "cover",
           backgroundPosition: "center",
-          backgroundImage: `url('${detail?.thumbnail.path}.${detail?.thumbnail.extension}')`,
+          backgroundImage: `url('${detail?.thumbnail?.path}.${detail?.thumbnail?.extension}')`,
         }}
       >
         {/* 필터처리 */}
@@ -34,36 +34,36 @@ export default function CharacterDetail() {
           <div className="w-full h-full flex">
             <img
               className="w-[85%] aspect-[2/3] object-cover"
-              src={`${detail?.thumbnail.path}.${detail?.thumbnail.extension}`}
+              src={`${detail?.thumbnail?.path}.${detail?.thumbnail.extension}`}
               alt="character_image"
             />
           </div>
           {/* 오른쪽 */}
           <div className="w-full h-full flex flex-col text-white space-y-8">
-            <h1 className="text-xl font-bold">{detail.name}</h1>
+            <h1 className="text-xl font-bold">{detail?.name}</h1>
             <div>
               <h2 className="text-xl font-bold">Published</h2>
-              <p>{detail.modified?.substr(0, 10)}</p>
+              <p>{detail?.modified?.substr(0, 10)}</p>
             </div>
             {/* 코믹스 */}
             <div>
               <h2 className="text-xl font-bold">comics</h2>
-              {detail.comics?.items?.slice(0, 3).map((item, index) => (
-                <p key={index}>{item.name}</p>
+              {detail?.comics?.items?.slice(0, 3).map((item, index) => (
+                <p key={index}>{item?.name}</p>
               ))}
             </div>
             {/* 이벤트 */}
             <div>
               <h2 className="text-xl font-semibold">Events</h2>
-              {detail.events?.items?.slice(0, 3).map((item, index) => (
-                <p key={index}>{item.name}</p>
+              {detail?.events?.items?.slice(0, 3).map((item, index) => (
+                <p key={index}>{item?.name}</p>
               ))}
             </div>
             {/* description */}
             <div>
               <h2 className="text-xl font-semibold">Description</h2>
               <p>
-                {detail.description
+                {detail?.description
                   ? detail.description
                   : "THE EVOLUTION OF MS. MARVEL CONTINUES! The world may have turned against mutantkind, but now they’ve got Ms. Marvel to stand up for them!"}
               </p>

@@ -2,14 +2,29 @@ import React from "react";
 import Layout from "../components/Layout";
 import Layout7 from "../components/Layout7";
 import { useForm } from "react-hook-form";
+import { apiPostMail } from "../api";
+import { useMutation } from "react-query";
 
 export default function Email() {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({ mode: "onChange" });
-  const onSubmit = (formData) => console.log(formData);
+
+  const { mutate, isLoading, data } = useMutation(apiPostMail, {
+    onSuccess: () => {
+      console.log(data);
+      if (data.result === "success") {
+        reset();
+      }
+    },
+  });
+
+  const onSubmit = (formData) => {
+    mutate(formData);
+  };
   return (
     <Layout>
       <Layout7>
@@ -42,10 +57,14 @@ export default function Email() {
                 </span>
               )}
             </div>
-            <div className="flex flex-cols space-y-2">
+            <div className="flex flex-col space-y-2">
               <input
                 {...register("email", {
                   required: "이메일은 필수 입력사항입니다.",
+                  pattern: {
+                    value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                    message: "이메일 형식으로 입력해 주세요!",
+                  },
                 })}
                 className=" px-4 py-4 border"
                 type="text"
@@ -57,17 +76,31 @@ export default function Email() {
                 </span>
               )}
             </div>
-            <input
-              {...register("message")}
-              className=" px-2 py-4 border"
-              type="text"
-              placeholder="message"
-            />
+            <div className="flex flex-col space-y-2">
+              <input
+                {...register("message", {
+                  required: true,
+                  minLength: {
+                    value: 5,
+                    message: "메시지 입력은 5글자 이상이어야 합니다.",
+                  },
+                })}
+                className=" px-2 py-4 border"
+                type="text"
+                placeholder="message"
+              />
+              {errors?.message && (
+                <span className="text-red-600 text-sm px-4">
+                  {errors?.message?.message}
+                </span>
+              )}
+            </div>
             <button
               className="bg-red-600 text-white px-4 py-2 rounded"
-              text="submit"
+              type="submit"
+              disabled={isLoading ? true : false}
             >
-              SEND
+              {isLoading ? "전송중..." : "전송"}
             </button>
           </form>
         </div>

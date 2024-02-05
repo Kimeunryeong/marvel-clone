@@ -9,6 +9,7 @@ import Character from "./routes/Characters.jsx";
 import ComicDetail from "./routes/ComicDetail.jsx";
 import Comics from "./routes/Comics.jsx";
 import Email from "./routes/Email.jsx";
+import CharacterDetail from "./routes/CharacterDetail.jsx";
 
 const router = createBrowserRouter([
   {
@@ -18,15 +19,10 @@ const router = createBrowserRouter([
     children: [
       { path: "", element: <MainPage /> },
       { path: "email", element: <Email /> },
-      {
-        path: "characters",
-        element: <Character />,
-      },
-      {
-        path: "comics/:id",
-        element: <ComicDetail />,
-      },
       { path: "comics", element: <Comics /> },
+      { path: "comics/:id", element: <ComicDetail />},
+      { path: "characters", element: <Character />},
+      { path: "characters/:id", element: <CharacterDetail /> },
     ],
   },
 ]);
