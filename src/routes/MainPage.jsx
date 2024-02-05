@@ -8,10 +8,7 @@ import TitleRotate from "../components/TitleRotate";
 import Layout7 from "../components/Layout7";
 import { RingLoader } from "react-spinners";
 import Button from "../components/Button";
-import HypeImg from "../assets/titleHype.svg"
-
-
-
+import HypeImg from "../assets/titleHype.svg";
 
 export default function MainPage() {
   let lists; // fetch 요청한 배열을 받기 위한 변수

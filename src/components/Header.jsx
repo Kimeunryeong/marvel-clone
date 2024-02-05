@@ -1,9 +1,56 @@
 import { FaSearch } from "react-icons/fa";
 import title_logo from "../assets/png/title_logo.png";
-import { Link } from "react-router-dom";
+import NavLink from "./NavLink";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import ComicsComponent from "./menus/ComicsComponent";
 
+const MENUS = [
+  {
+    text: "news",
+    href: "#",
+    component: ComicsComponent,
+  },
+  {
+    text: "comics",
+    href: "/comics",
+    component: "",
+  },
+  {
+    text: "characters",
+    href: "/characters",
+    component: "",
+  },
+  {
+    text: "movies",
+    href: "/movies",
+    component: "",
+  },
+  {
+    text: "Tv show",
+    href: "/tv",
+    component: "",
+  },
+  {
+    text: "games",
+    href: "/games",
+    component: "",
+  },
+  {
+    text: "videos",
+    href: "/videos",
+    component: "",
+  },
+  {
+    text: "more",
+    href: "/more",
+    component: "",
+  },
+];
 
 export default function Header() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  console.log(menuOpen);
   return (
     <>
       {/* 헤더 */}
@@ -43,17 +90,32 @@ export default function Header() {
           </div>
         </div>
       </section>
-      <section className="w-full flex justify-center h-10 bg-main-color border-y border-gray-700 space-x-8 text-white items-center uppercase">
-        <p>news</p>
-        <Link to="/comics">comics</Link>
-        <Link to="/characters">characters</Link>
-        <p>movies</p>
-        <p>tv shows</p>
-        <p>games</p>
-        <p>videos</p>
-        <p>more</p>
-      </section>
-     
+      <div className="relative">
+        <section className="w-full flex justify-center h-10 bg-main-color border-y border-gray-700 space-x-8 text-white items-center uppercase">
+          {MENUS.map((item, index) => (
+            <NavLink
+              menuOpen={menuOpen}
+              setMenuOpen={setMenuOpen}
+              key={index}
+              href={item.href}
+              component={item.component}
+            >
+              {item.text}
+            </NavLink>
+          ))}
+        </section>
+        {menuOpen && (
+          <AnimatePresence>
+            <motion.div
+              initial={{ opacity: 0, y: -5 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -5 }}
+              transition={{ duration: 0.3, ease: "easeOut"}}
+              className=" absolute z-30 top-10 left-0 ring-0 w-full h-80 bg-white"
+            ></motion.div>
+          </AnimatePresence>
+        )}
+      </div>
     </>
   );
 }
