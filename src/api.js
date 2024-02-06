@@ -1,5 +1,7 @@
 const API_KEY = import.meta.env.VITE_API_KEY;
 const BASE_URL = "https://gateway.marvel.com:443/v1/public";
+// https://gateway.marvel.com:443/v1/public/characters?apikey=0644f2010aac7b3c879873cc3a0da29e
+
 
 // [Get] Comics 리스트
 export async function apiGetComics({queryKey}) {

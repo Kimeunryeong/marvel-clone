@@ -14,6 +14,7 @@ export default function Characters() {
 
   if (!isLoading) {
     characters = data?.data.results;
+    // console.log(characters)
   }
 
   return (
@@ -21,7 +22,7 @@ export default function Characters() {
       {/* 캐릭터 서브페이지 이미지타이틀 */}
       <section className="relative w-full h-[400px]">
         <img
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover object-center"
           src="https://insidethemagic.net/wp-content/uploads/2023/02/black-panther-wakanda-forever-banner-women.jpg"
           alt="characters_image"
         />
@@ -44,7 +45,7 @@ export default function Characters() {
               <ScaleLoader color="red" />
             </div>
           ) : (
-            <div className="grid grid-cols-6 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
               {characters?.map((item, index) => (
                 <div key={index} className="h-[340px] group cursor-pointer">
                   <Link to={`/characters/${item.id}`}>

@@ -30,7 +30,7 @@ export default function TitleImageBox({ imgUrl, mainTitle, subTitle, description
             <div className="space-y-2">
               {/* 사선으로 된 제목 */}
               <TitleRotate text={mainTitle} />
-              <h1 className="text-4xl font-bold uppercase">
+              <h1 className="text-2xl font-bold uppercase">
                 {subTitle}
               </h1>
               <p>{description}</p>

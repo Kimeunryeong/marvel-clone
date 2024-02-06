@@ -1,5 +1,4 @@
 import React from "react";
-
 const MENUS = [
   {
     image:
@@ -26,7 +25,8 @@ const MENUS = [
     description: "2023",
   },
 ];
-export default function ComicsComponent() {
+
+export default function CharactersComponent() {
   return (
     <div className=" w-full flex justify-center ">
       <div className=" max-w-7xl w-full py-16 flex flex-col items-center space-y-8">

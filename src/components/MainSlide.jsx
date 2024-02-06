@@ -42,7 +42,7 @@ const Card = ({
           {/* 백그라운드 이미지 */}
 
           <img
-            className="w-full h-full object-cover object-center"
+            className="w-full h-full object-center object-center"
             src={image}
             alt={title}
           />
@@ -63,7 +63,7 @@ const Card = ({
             </p>
             <div className="flex space-x-4">
               {link1 && <Button link={link1} text={btn1} />}
-              {link2 && <Button link={link2} text={btn2} />}
+              {/* {link2 && <Button link={link2} text={btn2} />} */}
             </div>
           </div>
         </div>
@@ -86,7 +86,7 @@ const SelectedBtns = ({ numTracks, setSelected, selected }) => {
               className="absolute top-0 left-0 bg-red-600 w-full h-full"
               initial={{ width: "0%" }}
               animate={{ width: "100%" }}
-              transition={{ duration: 3, ease: "easeOut" }}
+              transition={{ duration: 6, ease: "easeOut" }}
               onAnimationComplete={() => {
                 setSelected(selected === array.length - 1 ? 0 : selected + 1);
               }}
@@ -102,7 +102,7 @@ const SelectedBtns = ({ numTracks, setSelected, selected }) => {
           <p
             className={`w-full h-16 text-left items-start pt-4 px-1 text-gray-500 ${
               selected === index && "text-red-600"
-            } capitalize`}
+            } uppercase`}
           >
             {item.btn1}
           </p>
@@ -119,7 +119,7 @@ export default function MainSlide() {
       {/* notice disney */}
       <NoticeDisney />
       {/* 그림 */}
-      <div className="relative w-full h-[450px]">
+      <div className="relative w-full h-[650px]">
         {testimonials.map((item, index) => (
           <Card
             key={index}

@@ -60,8 +60,8 @@ export default function MainPage() {
       <ListCarousel lists={lists} />
 
       {/* 이벤트 */}
-      <section className=" w-full flex justify-center">
-        <div className=" max-w-7xl w-full  grid grid-cols-[7fr_3fr] gap-16">
+      <section className=" w-full flex justify-center px-4 ">
+        <div className=" max-w-7xl w-full grid gird-cols-1 md:grid-cols-[7fr_3fr] gap-16">
           {/* 왼쪽 */}
           <div className=" w-full h-full ">
             {/* 타이틀 */}
@@ -70,7 +70,7 @@ export default function MainPage() {
             <div className=" w-full">
               {events?.slice(0, 6).map((item, index) => (
                 <div
-                  key={item?.id}
+                  key={index}
                   className="w-full h-64 flex pb-4 space-x-6 border-b-2 cursor-pointer"
                 >
                   {/* 이미지 */}
@@ -82,7 +82,7 @@ export default function MainPage() {
                     />
                   </div>
                   {/* description */}
-                  <div className="w-[60%] h-full space-y-2">
+                  <div className="w-[60%] h-full space-y-2 overflow-hidden">
                     <h2 className="uppercase font-bold group-hover:text-red-600 duration-500">
                       {item.title}
                     </h2>
@@ -165,8 +165,8 @@ export default function MainPage() {
       )}
 
       {/* 마블 인사이더 */}
-      <section className="w-full flex justify-center h-80 bg-black">
-        <div className="max-w-7xl w-full h-full grid grid-cols-[4fr_6fr]">
+      <section className="w-full flex justify-center h-auto md:h-80 bg-black">
+        <div className="max-w-7xl w-full h-full grid grid-cols-1 md:grid-cols-[4fr_6fr]">
           {/* 왼쪽 */}
           <div className="w-full h-full">
             <div className="w-full h-full">
@@ -177,12 +177,12 @@ export default function MainPage() {
             </div>
           </div>
           {/* 오른쪽 */}
-          <div className="w-full h-full flex flex-col text-white items-center justify-center space-y-4">
+          <div className="w-full h-full py-8 flex flex-col text-white items-center justify-center space-y-4">
             <h3 className="text-red-600 uppercase tracking-wider	">
               Marvel insider
             </h3>
             <h4 className=" text-2xl font-bold">Watch, Earn, Redeem!</h4>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+            <p className=" text-center">Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
             <Button text="join now" />
           </div>
         </div>
