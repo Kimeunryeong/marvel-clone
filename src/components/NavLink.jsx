@@ -5,7 +5,6 @@ export default function NavLink({
   children,
   href,
   component,
-  menuOpen,
   setMenuOpen,
   setMenuContent,
 }) {

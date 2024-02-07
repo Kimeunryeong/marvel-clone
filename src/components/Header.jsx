@@ -7,7 +7,7 @@ import ComicsComponent from "./menus/ComicsComponent";
 import CharactersComponent from "./menus/CharactersComponent";
 import MobileMenu from "./MobileMenu";
 
-const MENUS = [
+export const MENUS = [
   {
     text: "news",
     href: "#",
@@ -67,6 +67,8 @@ export default function Header() {
             <span>|</span>
             <span>JOIN</span>
           </div>
+          {/* 모바일ver메뉴 */}
+          <MobileMenu />
           {/* 오른쪽 로고 : 검색 */}
           <div className="px-4 flex border-x border-gray-700 h-full items-center space-x-4 md:border-1 border-r ">
             <div className="h-full flex items-center space-x-2">
@@ -90,7 +92,6 @@ export default function Header() {
           <div className="absolute top-0 left-[50%] -translate-x-[50%] items-center h-full">
             <img className="h-full" src={title_logo} alt="logo_large" />
           </div>
-          <MobileMenu />
         </div>
       </section>
       <div className="relative">
@@ -108,7 +109,7 @@ export default function Header() {
             </NavLink>
           ))}
         </section>
-        {menuOpen && (
+        {menuOpen && menuContent && (
           <AnimatePresence>
             <motion.div
               onMouseEnter={() => setMenuOpen(true)}
